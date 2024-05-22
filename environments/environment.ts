@@ -1,5 +1,3 @@
-import { initializeApp } from 'firebase/app';
-
 export const environment = {
   production: false,
   firebaseConfig: {
@@ -12,4 +10,3 @@ export const environment = {
   },
 };
 
-export const app = initializeApp(environment.firebaseConfig);
