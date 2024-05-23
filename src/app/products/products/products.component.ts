@@ -4,7 +4,12 @@ import { Product } from '../../../types/types';
 import { Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
-import { FormGroup, FormBuilder, Validators, ReactiveFormsModule } from '@angular/forms';
+import {
+  FormGroup,
+  FormBuilder,
+  Validators,
+  ReactiveFormsModule,
+} from '@angular/forms';
 
 @Component({
   selector: 'app-products',
@@ -42,13 +47,18 @@ export class ProductsComponent implements OnInit {
     this.isModalOpen = false;
   }
 
+  resetForm(): void {
+    this.closeModal()
+    this.productForm.reset();
+  }
+
   onSubmit() {
     if (this.productForm.valid) {
       const newProduct: Product = this.productForm.value;
       this.productService.addProduct(newProduct).subscribe(() => {
         this.productService.getProducts().subscribe((products) => {
           this.products = products;
-          this.closeModal();
+          this.resetForm();
         });
       });
     }
