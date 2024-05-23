@@ -16,7 +16,8 @@ export class AuthService {
 
   async login(email: string, password: string): Promise<void> {
     try {
-      await this.afAuth.signInWithEmailAndPassword(email, password);
+      const res = await this.afAuth.signInWithEmailAndPassword(email, password);
+      console.log(res)
     } catch (error) {
       console.error('Login error: ', error);
       throw error;

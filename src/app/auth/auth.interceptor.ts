@@ -12,9 +12,9 @@ import { AuthService } from './auth.service';
 import { Router } from '@angular/router';
 
 export const AuthInterceptor: HttpInterceptorFn = (
-  req: HttpRequest<any>,
+  req: HttpRequest<unknown>,
   next: HttpHandlerFn,
-): Observable<HttpEvent<any>> => {
+): Observable<HttpEvent<unknown>> => {
   const authService = inject(AuthService);
   const router = inject(Router);
 

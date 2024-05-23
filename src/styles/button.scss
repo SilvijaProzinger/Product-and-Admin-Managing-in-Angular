@@ -1,0 +1,45 @@
+button {
+  width: 100%;
+  padding: 0.5rem 1rem;
+  border: none;
+  border-radius: 0.5rem;
+  color: #fffefb;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  font-size: 1.2rem;
+  margin-bottom: 1rem;
+
+  &:disabled {
+    background-color: #cccbc8;
+  }
+
+  @media (min-width: 768px) {
+    width: auto;
+  }
+}
+
+.primary {
+  background-color: #00668c;
+
+  &:hover {
+    background-color: #b6ccd8;
+  }
+}
+
+.outlined {
+  background-color: transparent;
+  border: 1px solid #00668c;
+  color: #00668c;
+
+  &:hover {
+    border: 1px solid #b6ccd8;
+  }
+}
+
+.error {
+  background-color: $secondary-color;
+
+  &:hover {
+    background-color: $secondary-lighter-color;
+  }
+}

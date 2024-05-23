@@ -33,7 +33,7 @@ export class LoginComponent {
           Validators.required,
           Validators.minLength(8),
           Validators.pattern(
-            '^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d.*\\d.*\\d)(?=.*[@$!%*?&].*[@$!%*?&])[A-Za-z\\d@$!%*?&]{8,}$',
+            '^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d{3,})(?=.*[-_@$!%*?&]{2,})[A-Za-z\\d\\-_@$!%*?&]{8,}$',
           ),
         ],
       ],
@@ -48,7 +48,6 @@ export class LoginComponent {
           this.loginForm.value.password,
         );
         this.router.navigate(['/']);
-        console.log('login successful')
       } catch (error) {
         this.error = 'Invalid login credentials';
       }
