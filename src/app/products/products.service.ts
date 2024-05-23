@@ -9,6 +9,8 @@ import { Products } from '../data/products';
 export class ProductService {
   constructor() {}
 
+  private products = Products;
+
   getProducts(): Observable<Product[]> {
     return of(Products);
   }
@@ -16,5 +18,10 @@ export class ProductService {
   getProductById(id: number): Observable<Product | undefined> {
     const product = Products.find((product) => product.id === id);
     return of(product);
+  }
+
+  addProduct(newProduct: Product): Observable<void> {
+    this.products.push({ ...newProduct, id: this.products.length + 1 });
+    return of();
   }
 }
