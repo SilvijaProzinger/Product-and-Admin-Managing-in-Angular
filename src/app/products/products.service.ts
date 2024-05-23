@@ -24,4 +24,12 @@ export class ProductService {
     this.products.push({ ...newProduct, id: this.products.length + 1 });
     return of();
   }
+
+  deleteProduct(id: number): Observable<void> {
+    const index = Products.findIndex((product) => product.id === id);
+    if (index !== -1) {
+      Products.splice(index, 1);
+    }
+    return of();
+  }
 }

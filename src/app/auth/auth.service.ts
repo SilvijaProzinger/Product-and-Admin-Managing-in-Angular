@@ -17,7 +17,7 @@ export class AuthService {
   async login(email: string, password: string): Promise<void> {
     try {
       const res = await this.afAuth.signInWithEmailAndPassword(email, password);
-      console.log(res)
+      console.log(res);
     } catch (error) {
       console.error('Login error: ', error);
       throw error;
@@ -35,5 +35,10 @@ export class AuthService {
       console.error('Error getting token: ', error);
       return null;
     }
+  }
+
+  isAdmin(user: firebase.User | null): boolean {
+    const adminEmails = ['admin@example.com']; // check if user's email is one of the known admin emails
+    return user ? adminEmails.includes(user.email ?? '') : false;
   }
 }
