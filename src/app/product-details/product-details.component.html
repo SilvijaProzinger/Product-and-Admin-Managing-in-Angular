@@ -1,0 +1,14 @@
+<div *ngIf="product" class="container product-details-container">
+  <div class="product-details-box">
+    <h1>{{ product.name }}</h1>
+    <p><strong>Description:</strong> {{ product.description }}</p>
+    <p><strong>Price:</strong>$ {{ product.price | currency }}</p>
+    <div class="product-details-actions">
+      <button class="error">Delete product</button>
+      <button class="outlined">Edit product</button>
+    </div>
+  </div>
+  <div *ngIf="!product">
+    <p>Product not found.</p>
+  </div>
+</div>

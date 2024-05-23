@@ -1,0 +1,23 @@
+.product-details-container {
+  .product-details-box {
+    max-width: 600px;
+
+    strong {
+      display: block;
+      margin-bottom: 0.5rem;
+    }
+
+    h1 {
+      text-align: center;
+      padding-bottom: 2rem;
+    }
+
+    .product-details-actions {
+      margin-top: 2rem;
+
+      button.error {
+        margin-right: 1rem;
+      }
+    }
+  }
+}
