@@ -58,9 +58,9 @@ export class ProductsComponent implements OnInit {
       this.productService.addProduct(newProduct).subscribe(() => {
         this.productService.getProducts().subscribe((products) => {
           this.products = products;
-          this.resetForm();
         });
       });
+      this.resetForm();
     }
   }
 

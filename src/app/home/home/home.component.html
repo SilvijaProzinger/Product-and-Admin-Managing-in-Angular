@@ -1,5 +1,6 @@
 <div class="container home-container">
-  <h1>Welcome, Admin</h1>
+  <button (click)="logout()" class="logout-button outlined">Logout</button>
+  <h1>Welcome, {{ isAdmin ? "Admin" : "User" }}</h1>
   <div class="links-container">
     <div class="link-box">
       <img
@@ -8,7 +9,7 @@
         class="link-image"
       />
       <div class="link-content">
-        <a routerLink="products" >Go to Products</a>
+        <a routerLink="products">Go to Products</a>
         <p>View and manage product list</p>
       </div>
     </div>
