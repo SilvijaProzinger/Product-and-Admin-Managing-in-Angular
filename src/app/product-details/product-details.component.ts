@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 import { ProductService } from '../products/products.service';
 import { Product } from '../../types/types';
 import { CommonModule } from '@angular/common';
@@ -27,7 +27,6 @@ export class ProductDetailsComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private productService: ProductService,
-    private router: Router,
     private authService: AuthService,
     private fb: FormBuilder,
   ) {}
@@ -43,7 +42,10 @@ export class ProductDetailsComponent implements OnInit {
     });
 
     this.productForm = this.fb.group({
-      name: [this.product?.name, [Validators.required, Validators.maxLength(32)]],
+      name: [
+        this.product?.name,
+        [Validators.required, Validators.maxLength(32)],
+      ],
       price: [this.product?.price, [Validators.required, Validators.min(1)]],
       description: [this.product?.description, [Validators.maxLength(160)]],
     });
@@ -52,7 +54,7 @@ export class ProductDetailsComponent implements OnInit {
   deleteProduct(): void {
     if (this.isAdmin && this.product) {
       this.productService.deleteProduct(this.product.id).subscribe(() => {
-        this.router.navigate(['/products']);
+        console.log('Product deleted successfully.')
       });
     } else {
       console.log('Error! Only an admin can perform the delete operation.');
@@ -64,7 +66,7 @@ export class ProductDetailsComponent implements OnInit {
   }
 
   saveEdit(): void {
-    if (this.productForm.valid && this.product) {
+    if (this.productForm.valid && this.product && this.isAdmin) {
       const updatedProduct: Product = {
         ...this.product,
         ...this.productForm.value,
@@ -72,7 +74,6 @@ export class ProductDetailsComponent implements OnInit {
       this.productService.updateProduct(updatedProduct).subscribe(() => {
         this.product = updatedProduct;
         this.isEditOn = false;
-        this.router.navigate(['/products']);
       });
     }
   }

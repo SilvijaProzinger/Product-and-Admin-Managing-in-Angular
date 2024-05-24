@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { Router } from '@angular/router';
 import { Product } from '../../types/types';
 import { Observable, of } from 'rxjs';
 import { Products } from '../data/products';
@@ -7,7 +8,7 @@ import { Products } from '../data/products';
   providedIn: 'root',
 })
 export class ProductService {
-  constructor() {}
+  constructor(private router: Router) {}
 
   private products = Products;
 
@@ -30,6 +31,7 @@ export class ProductService {
     if (index !== -1) {
       Products.splice(index, 1);
     }
+    this.router.navigate(['/products']);
     return of();
   }
 
@@ -38,6 +40,7 @@ export class ProductService {
     if (index !== -1) {
       this.products[index] = updatedProduct;
     }
+    this.router.navigate(['/products']);
     return of();
   }
 }
