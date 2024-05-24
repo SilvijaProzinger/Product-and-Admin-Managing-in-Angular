@@ -72,6 +72,7 @@ export class ProductDetailsComponent implements OnInit {
       this.productService.updateProduct(updatedProduct).subscribe(() => {
         this.product = updatedProduct;
         this.isEditOn = false;
+        this.router.navigate(['/products']);
       });
     }
   }
