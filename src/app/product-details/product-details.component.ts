@@ -22,7 +22,7 @@ export class ProductDetailsComponent implements OnInit {
   product: Product | undefined;
   isAdmin = false;
   isEditOn = false;
-  productForm: FormGroup;
+  productForm!: FormGroup;
 
   constructor(
     private route: ActivatedRoute,
@@ -30,13 +30,7 @@ export class ProductDetailsComponent implements OnInit {
     private router: Router,
     private authService: AuthService,
     private fb: FormBuilder,
-  ) {
-    this.productForm = this.fb.group({
-      name: [this.product?.name, [Validators.required, Validators.maxLength(32)]],
-      price: [0, [Validators.required, Validators.min(1)]],
-      description: ['', [Validators.maxLength(160)]],
-    });
-  }
+  ) {}
 
   ngOnInit(): void {
     const productId = Number(this.route.snapshot.paramMap.get('id'));
@@ -46,6 +40,12 @@ export class ProductDetailsComponent implements OnInit {
 
     this.authService.user$.subscribe((user) => {
       this.isAdmin = this.authService.isAdmin(user);
+    });
+
+    this.productForm = this.fb.group({
+      name: [this.product?.name, [Validators.required, Validators.maxLength(32)]],
+      price: [this.product?.price, [Validators.required, Validators.min(1)]],
+      description: [this.product?.description, [Validators.maxLength(160)]],
     });
   }
 

@@ -39,6 +39,12 @@ export class ProductsComponent implements OnInit {
     });
   }
 
+  ngOnInit(): void {
+    this.productService.getProducts().subscribe((products) => {
+      this.products = products;
+    });
+  }
+
   openNewProductModal() {
     this.isModalOpen = true;
   }
@@ -48,7 +54,7 @@ export class ProductsComponent implements OnInit {
   }
 
   resetForm(): void {
-    this.closeModal()
+    this.closeModal();
     this.productForm.reset();
   }
 
@@ -62,12 +68,6 @@ export class ProductsComponent implements OnInit {
       });
       this.resetForm();
     }
-  }
-
-  ngOnInit(): void {
-    this.productService.getProducts().subscribe((products) => {
-      this.products = products;
-    });
   }
 
   navigateToProduct(id: number): void {
