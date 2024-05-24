@@ -11,9 +11,19 @@ This is a web app made for managing the product list and admin users. It's made 
 
 ## TO-DO 
 
+This is a list of things that should've been completed along with additional features that would've made this app production ready. 
+
 * Admins can view admin list 
 * Admins can edit existing admin users 
 * Admins can delete other admins
+
+### Potential improvements
+
+* Firebase config file and credentials are not pushed to git by default and are shared with trusted users.
+* The app styling should be further tested for responsiveness
+* InjectionToken Error (possible Angular 17 and Firebase compatibility issue) should be fixed
+* Login should persist in session storage
+* The app should use data from a real API instead of dummy data
 
 ## How to run
 
