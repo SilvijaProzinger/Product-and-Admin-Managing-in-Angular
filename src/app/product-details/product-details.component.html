@@ -1,11 +1,90 @@
 <div *ngIf="product" class="container product-details-container">
   <div class="product-details-box">
     <h1>{{ product.name }}</h1>
-    <p><strong>Description:</strong> {{ product.description }}</p>
-    <p><strong>Price:</strong>$ {{ product.price | currency }}</p>
-    <div class="product-details-actions" *ngIf="isAdmin">
-      <button class="error" (click)="deleteProduct()">Delete Product</button>
-      <button class="outlined">Edit product</button>
+    <div *ngIf="product">
+      <div *ngIf="!isEditOn">
+        <p><strong>Description:</strong> {{ product.description }}</p>
+        <p><strong>Price:</strong>$ {{ product.price | currency }}</p>
+        <div class="product-details-actions" *ngIf="isAdmin">
+          <button class="error" (click)="deleteProduct()">
+            Delete Product
+          </button>
+          <button class="outlined" (click)="toggleEditMode()">Edit product</button>
+        </div>
+      </div>
+
+      <div *ngIf="isEditOn" class="form-container">
+        <form [formGroup]="productForm" (ngSubmit)="saveEdit()">
+          <div class="form-group">
+            <label for="name">Product name:</label>
+            <input id="name" formControlName="name" />
+            <div
+              *ngIf="
+                productForm.get('name')?.invalid &&
+                (productForm.get('name')?.touched ||
+                  productForm.get('name')?.dirty)
+              "
+            >
+              <small
+                *ngIf="productForm.get('name')?.errors?.['required']"
+                class="form-error"
+                >Product name is required.</small
+              >
+              <small
+                *ngIf="productForm.get('name')?.errors?.['maxlength']"
+                class="form-error"
+                >Product name can't be longer than 32 characters.</small
+              >
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="price">Price:</label>
+            <input id="price" type="number" formControlName="price" />
+            <div
+              *ngIf="
+                productForm.get('price')?.invalid &&
+                (productForm.get('price')?.touched ||
+                  productForm.get('price')?.dirty)
+              "
+            >
+              <small
+                *ngIf="productForm.get('price')?.errors?.['required']"
+                class="form-error"
+                >Price is required.</small
+              >
+              <small
+                *ngIf="productForm.get('price')?.errors?.['min']"
+                class="form-error"
+                >Price has to be greater than zero.</small
+              >
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="description">Description:</label>
+            <textarea id="description" formControlName="description"></textarea>
+            <div
+              *ngIf="
+                productForm.get('description')?.invalid &&
+                (productForm.get('description')?.touched ||
+                  productForm.get('description')?.dirty)
+              "
+            >
+              <small
+                *ngIf="productForm.get('description')?.errors?.['maxlength']"
+                class="form-error"
+                >Description can't be longer than 160 characters.</small
+              >
+            </div>
+          </div>
+
+          <div class="form-actions">
+            <button type="button" class="error" (click)="toggleEditMode()">Cancel</button>
+            <button type="submit" class="primary" [disabled]="productForm.invalid">Save</button>
+          </div>
+        </form>
+      </div>
     </div>
   </div>
   <div *ngIf="!product">

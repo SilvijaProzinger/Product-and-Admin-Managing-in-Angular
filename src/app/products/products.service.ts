@@ -32,4 +32,12 @@ export class ProductService {
     }
     return of();
   }
+
+  updateProduct(updatedProduct: Product): Observable<void> {
+    const index = this.products.findIndex((p) => p.id === updatedProduct.id);
+    if (index !== -1) {
+      this.products[index] = updatedProduct;
+    }
+    return of();
+  }
 }
