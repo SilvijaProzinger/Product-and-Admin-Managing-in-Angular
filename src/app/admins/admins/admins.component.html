@@ -1,0 +1,46 @@
+<div class="container">
+  <h1>Admins</h1>
+  <p>Add or manage admin users</p>
+  <button class="primary" (click)="openNewAdminModal()">Add new admin</button>
+  <div class="admin-new-modal" *ngIf="isModalOpen">
+    <div class="modal-content form-container">
+      <button class="close" (click)="closeNewAdminModal()">&times;</button>
+      <h2>Add New Admin</h2>
+      <form [formGroup]="newAdminForm" (ngSubmit)="onSubmit()">
+        <div class="form-group">
+          <label for="email">Email</label>
+          <input id="email" type="email" formControlName="email" />
+          <div
+            *ngIf="
+              newAdminForm.get('email')?.invalid &&
+              newAdminForm.get('email')?.touched
+            "
+          >
+            <div
+              class="form-error"
+              *ngIf="newAdminForm.get('email')?.errors?.['required']"
+            >
+              Email is required
+            </div>
+            <div
+              class="form-error"
+              *ngIf="newAdminForm.get('email')?.errors?.['email']"
+            >
+              Email is invalid
+            </div>
+          </div>
+        </div>
+        <div class="form-actions">
+          <button class="outlined" (click)="resetForm()">Cancel</button>
+          <button
+            class="primary"
+            type="submit"
+            [disabled]="newAdminForm.invalid"
+          >
+            Save
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

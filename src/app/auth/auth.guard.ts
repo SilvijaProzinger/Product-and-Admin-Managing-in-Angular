@@ -18,8 +18,7 @@ export const authGuard: CanActivateFn = (
   return authService.user$.pipe(
     map((user) => {
       if (user) {
-        const requiresAdmin =
-          state.url.includes('delete') || state.url.includes('edit');
+        const requiresAdmin = state.url.includes('admins');
         if (requiresAdmin && !authService.isAdmin(user)) {
           router.navigate(['/not-authorized']);
           return false;

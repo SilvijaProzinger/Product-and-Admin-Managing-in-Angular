@@ -9,6 +9,7 @@ import { Observable, firstValueFrom } from 'rxjs';
 export class AuthService {
   private afAuth = inject(AngularFireAuth);
   user$: Observable<firebase.User | null>;
+  private adminEmails: string[] = ['admin@example.com'];
 
   constructor() {
     this.user$ = this.afAuth.authState;
@@ -38,7 +39,13 @@ export class AuthService {
   }
 
   isAdmin(user: firebase.User | null): boolean {
-    const adminEmails = ['admin@example.com']; // check if user's email is one of the known admin emails
-    return user ? adminEmails.includes(user.email ?? '') : false;
+    return user ? this.adminEmails.includes(user.email ?? '') : false;
+  }
+
+  addToAdminList(email: string): void {
+    if (!this.adminEmails.includes(email)) {
+      this.adminEmails.push(email);
+      console.log(this.adminEmails)
+    }
   }
 }
