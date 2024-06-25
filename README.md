@@ -8,6 +8,7 @@ This is a web app made for managing the product list and admin users. It's made 
 * Users can only view product list if they're logged in
 * Users can add a new product to the list
 * Admin users can edit or delete a product
+* Admin users can add new admins
 
 ## TO-DO 
 
@@ -20,8 +21,6 @@ This is a list of things that should've been completed along with additional fea
 ### Potential improvements
 
 * Firebase config file and credentials are not pushed to git by default and are shared with trusted users.
-* The app styling should be further tested for responsiveness
-* InjectionToken Error (possible Angular 17 and Firebase compatibility issue) should be fixed
 * Login should persist in session storage
 * The app should use data from a real API instead of dummy data
 
@@ -46,6 +45,6 @@ Password: Pswrd&_123
 
 User:
 ```
-Username: user@example.com
+Username: user@example.com 
 Password: Loop456-%
 ```
