@@ -4,9 +4,10 @@ This is a web app made for managing the product list and admin users. It's made 
 
 ## Features
 
-* Users can login with admin or user credentials 
+* Users can login with admin or regular user credentials 
 * Users can only view product list if they're logged in
 * Users can add a new product to the list
+* Users can mark a product as favorite 
 * Admin users can edit or delete a product
 * Admin users can add new admins
 

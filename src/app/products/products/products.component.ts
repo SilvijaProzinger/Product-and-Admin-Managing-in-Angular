@@ -22,6 +22,8 @@ export class ProductsComponent implements OnInit {
   products: Product[] = [];
   isModalOpen = false;
   productForm: FormGroup;
+  favorites: Product[] = [];
+  isFavoritesDropdownOpen = false;
 
   constructor(
     private productService: ProductService,
@@ -42,6 +44,13 @@ export class ProductsComponent implements OnInit {
   ngOnInit(): void {
     this.productService.getProducts().subscribe((products) => {
       this.products = products;
+    });
+    this.fetchFavorites();
+  }
+
+  fetchFavorites(): void {
+    this.productService.getFavoriteProducts().subscribe((favorites) => {
+      this.favorites = favorites;
     });
   }
 
@@ -72,5 +81,15 @@ export class ProductsComponent implements OnInit {
 
   navigateToProduct(id: number): void {
     this.router.navigate(['/products', id]);
+  }
+
+  toggleFavoritesDropdown(): void {
+    this.isFavoritesDropdownOpen = !this.isFavoritesDropdownOpen;
+  }
+
+  addToFavorites(product: Product, event: Event): void {
+    event.stopPropagation();
+    this.productService.addToFavorites(product);
+    this.fetchFavorites();
   }
 }

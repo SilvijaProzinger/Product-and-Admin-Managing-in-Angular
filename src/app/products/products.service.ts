@@ -11,6 +11,7 @@ export class ProductService {
   constructor(private router: Router) {}
 
   private products = Products;
+  private favoriteProducts: Product[] = [];
 
   getProducts(): Observable<Product[]> {
     return of(Products);
@@ -42,5 +43,15 @@ export class ProductService {
     }
     this.router.navigate(['/products']);
     return of();
+  }
+
+  addToFavorites(product: Product): void {
+    if (!this.favoriteProducts.some(p => p.id === product.id)) {
+      this.favoriteProducts.push(product);
+    }
+  }
+
+  getFavoriteProducts(): Observable<Product[]> {
+    return of(this.favoriteProducts);
   }
 }

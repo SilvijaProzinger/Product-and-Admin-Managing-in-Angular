@@ -2,16 +2,31 @@
   <div>
     <h1>Products</h1>
   </div>
+  <div class="favorites">
+    <button (click)="toggleFavoritesDropdown()">
+      <img src="../../../assets/heart.svg" class="favorite-icon" alt="" width="20" height="20" /> ({{
+        favorites.length
+      }})
+    </button>
+    <div class="favorites-dropdown" *ngIf="isFavoritesDropdownOpen">
+      <ul>
+        <li *ngFor="let favorite of favorites">{{ favorite.name }}</li>
+      </ul>
+    </div>
+  </div>
   <div class="product-list">
-    <a
+    <button
       class="product-item"
       *ngFor="let product of products"
-      [routerLink]="['/products', product.id]"
+      (click)="navigateToProduct(product.id)"
     >
       <span class="product-item-name">{{ product.name }}</span>
       <span class="product-item-price">${{ product.price }}</span>
       <span class="product-item-desc">{{ product.description }}</span>
-    </a>
+      <button (click)="addToFavorites(product, $event)">
+        Add to Favorites
+      </button>
+    </button>
   </div>
   <div class="actions">
     <button class="outlined" (click)="openNewProductModal()">
