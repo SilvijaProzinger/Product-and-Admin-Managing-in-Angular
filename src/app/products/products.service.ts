@@ -48,7 +48,7 @@ export class ProductService {
   addToFavorites(product: Product): void {
     if (!this.favoriteProducts.some(p => p.id === product.id)) {
       this.favoriteProducts.push(product);
-    }
+    } else this.favoriteProducts.splice(this.favoriteProducts.indexOf(product), 1)
   }
 
   getFavoriteProducts(): Observable<Product[]> {
