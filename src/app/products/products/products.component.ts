@@ -10,11 +10,12 @@ import {
   Validators,
   ReactiveFormsModule,
 } from '@angular/forms';
+import { FavoriteIconComponent } from '../../favorite-icon/favorite-icon.component';
 
 @Component({
   selector: 'app-products',
   standalone: true,
-  imports: [CommonModule, RouterModule, ReactiveFormsModule],
+  imports: [CommonModule, RouterModule, ReactiveFormsModule, FavoriteIconComponent],
   templateUrl: './products.component.html',
   styleUrls: ['./products.component.scss'],
 })
@@ -24,6 +25,8 @@ export class ProductsComponent implements OnInit {
   productForm: FormGroup;
   favorites: Product[] = [];
   isFavoritesDropdownOpen = false;
+  isFilled = false;
+  favoriteStarred: number[] = [];
 
   constructor(
     private productService: ProductService,
@@ -90,6 +93,7 @@ export class ProductsComponent implements OnInit {
   addToFavorites(product: Product, event: Event): void {
     event.stopPropagation();
     this.productService.addToFavorites(product);
+    this.favoriteStarred.push(product.id)
     this.fetchFavorites();
   }
 }
