@@ -2,12 +2,16 @@
 
 This is a web app made for managing the product list and admin users. It's made by Angular and styled with SCSS. It also uses Firebase for authorization.
 
+### GIF preview:
+
+![](https://github.com/SilvijaProzinger/Product-and-Admin-Managing-in-Angular/blob/master/src/assets/gif-preview.gif)
+
 ## Features
 
 * Users can login with admin or regular user credentials 
 * Users can only view product list if they're logged in
 * Users can add a new product to the list
-* Users can mark a product as favorite 
+* Users can mark a product as favorite and view favorite products
 * Admin users can edit or delete a product
 * Admin users can add new admins
 
