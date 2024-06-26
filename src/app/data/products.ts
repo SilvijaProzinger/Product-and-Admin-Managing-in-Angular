@@ -27,4 +27,10 @@ export const Products: Product[] = [
     description: 'OPPO F19 is officially announced on April 2021.',
     price: 280,
   },
+  {
+    id: 5,
+    name: 'Samsung A12',
+    description: 'Another classic budget phone from Samsung, packing a good camera and memory.',
+    price: 150,
+  },
 ];
