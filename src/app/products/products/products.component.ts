@@ -54,6 +54,9 @@ export class ProductsComponent implements OnInit {
       this.products = products;
     });
     this.fetchFavorites();
+    this.productService.favoriteStarred$.subscribe((favoriteStarred) => {
+      this.favoriteStarred = favoriteStarred;
+    });
   }
 
   fetchFavorites(): void {
@@ -95,17 +98,9 @@ export class ProductsComponent implements OnInit {
     this.isFavoritesDropdownOpen = !this.isFavoritesDropdownOpen;
   }
 
-  toggleFavoriteStar(product: Product) {
-    if (!this.favoriteStarred.includes(product.id)) {
-      this.favoriteStarred.push(product.id);
-    } else
-      this.favoriteStarred.splice(this.favoriteStarred.indexOf(product.id), 1);
-  }
-
   addToFavorites(product: Product, event: Event): void {
     event.stopPropagation();
     this.productService.addToFavorites(product);
-    this.toggleFavoriteStar(product);
     this.fetchFavorites();
   }
 }

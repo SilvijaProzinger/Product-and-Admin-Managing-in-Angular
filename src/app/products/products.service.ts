@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { Product } from '../../types/types';
-import { Observable, of } from 'rxjs';
+import { Observable, of, BehaviorSubject } from 'rxjs';
 import { Products } from '../data/products';
 
 @Injectable({
@@ -12,6 +12,8 @@ export class ProductService {
 
   private products = Products;
   private favoriteProducts: Product[] = [];
+  private favoriteStarredSubject = new BehaviorSubject<number[]>([]);
+  favoriteStarred$ = this.favoriteStarredSubject.asObservable();
 
   getProducts(): Observable<Product[]> {
     return of(Products);
@@ -46,12 +48,27 @@ export class ProductService {
   }
 
   addToFavorites(product: Product): void {
-    if (!this.favoriteProducts.some(p => p.id === product.id)) {
+    const index = this.favoriteProducts.findIndex((p) => p.id === product.id);
+    if (index === -1) {
       this.favoriteProducts.push(product);
-    } else this.favoriteProducts.splice(this.favoriteProducts.indexOf(product), 1)
+    } else {
+      this.favoriteProducts.splice(index, 1);
+    }
+    this.toggleFavoriteStar(product.id);
   }
 
   getFavoriteProducts(): Observable<Product[]> {
     return of(this.favoriteProducts);
+  }
+
+  toggleFavoriteStar(productId: number) {
+    const currentFavorites = this.favoriteStarredSubject.value;
+    if (currentFavorites.includes(productId)) {
+      this.favoriteStarredSubject.next(
+        currentFavorites.filter((id) => id !== productId),
+      );
+    } else {
+      this.favoriteStarredSubject.next([...currentFavorites, productId]);
+    }
   }
 }

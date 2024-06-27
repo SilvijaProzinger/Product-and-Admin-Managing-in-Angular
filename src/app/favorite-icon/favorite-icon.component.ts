@@ -17,5 +17,4 @@ export class FavoriteIconComponent {
   }
 
   @Input() isFilled = false;
-  @Input() favoriteStarred: number[] = []
 }
